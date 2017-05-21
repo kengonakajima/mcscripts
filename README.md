@@ -1,0 +1,2 @@
+# mcscripts
+Minecraft admin scripts
