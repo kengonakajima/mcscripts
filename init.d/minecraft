@@ -131,7 +131,22 @@ mc_update() {
      fi
    fi
 }
+
+mc_snapshot() {
+    mc_saveoff
+    
+    NOW=`date "+%Y-%m-%d_%Hh%M"`
+    BACKUP_FILE="$BACKUPPATH/minecraft_game_snapshot_${NOW}.tar"
+    echo "Making a snapshot of minecraft game and world..."
+    as_user "tar -C \"$MCPATH\"/.. -cf \"$BACKUP_FILE\" minecraft"
+    mc_saveon
  
+    echo "Compressing snapshot..."
+    #as_user "gzip -f \"$BACKUP_FILE\""
+    as_user "bzip2 -f \"$BACKUP_FILE\""
+    echo "Done."
+    
+}
 mc_backup() {
     mc_saveoff
     
@@ -187,6 +202,9 @@ case "$1" in
      ;;
    backup)
      mc_backup
+     ;;
+   snapshot)
+     mc_snapshot
      ;;
    status)
      if pgrep -u $USERNAME -f $SERVICE > /dev/null
