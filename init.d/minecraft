@@ -158,7 +158,7 @@ mc_backup() {
     as_user "tar -g /var/backup/mc.snar -C \"$MCPATH\" -cf \"$BACKUP_FILE\" $WORLD"
  
     echo "Backing up $SERVICE"
-    as_user "tar --exclude plugins/dynmap/web -C \"$MCPATH\" -rf \"$BACKUP_FILE\" $SERVICE"
+    as_user "tar -C \"$MCPATH\" -rf \"$BACKUP_FILE\" $SERVICE"
     #as_user "cp \"$MCPATH/$SERVICE\" \"$BACKUPPATH/minecraft_server_${NOW}.jar\""
  
     mc_saveon
