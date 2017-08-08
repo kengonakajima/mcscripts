@@ -138,7 +138,7 @@ mc_snapshot() {
     NOW=`date "+%Y-%m-%d_%Hh%M"`
     BACKUP_FILE="$BACKUPPATH/minecraft_game_snapshot_${NOW}.tar"
     echo "Making a snapshot of minecraft game and world..."
-    as_user "tar --exclude plugins/dynmap/web -C \"$MCPATH\"/.. -cf \"$BACKUP_FILE\" minecraft"
+    as_user "tar --exclude plugins/dynmap/web/tiles -C \"$MCPATH\"/.. -cf \"$BACKUP_FILE\" minecraft"
     mc_saveon
  
     echo "Compressing snapshot..."
@@ -158,7 +158,7 @@ mc_backup() {
     as_user "tar -g /var/backup/mc.snar -C \"$MCPATH\" -cf \"$BACKUP_FILE\" $WORLD"
  
     echo "Backing up $SERVICE"
-    as_user "tar --exclude plugins/dynmap/web -C \"$MCPATH\" -rf \"$BACKUP_FILE\" $SERVICE"
+    as_user "tar --exclude plugins/dynmap/web/tiles -C \"$MCPATH\" -rf \"$BACKUP_FILE\" $SERVICE"
     #as_user "cp \"$MCPATH/$SERVICE\" \"$BACKUPPATH/minecraft_server_${NOW}.jar\""
  
     mc_saveon
